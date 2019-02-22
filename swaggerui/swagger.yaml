@@ -1,0 +1,2525 @@
+---
+swagger: "2.0"
+info:
+  description: " data marketplace network "
+  version: "0.1.10"
+  title: "datamarketplace-contract-network"
+basePath: "/api"
+schemes:
+- "http"
+- "https"
+tags:
+- name: "Business"
+  description: "A participant named Business"
+- name: "Person"
+  description: "A participant person"
+- name: "DataCategory"
+  description: "An asset named DataCategory"
+- name: "DataContractType"
+  description: "An asset named DataContractType"
+- name: "DataContract"
+  description: "An asset named DataContract"
+- name: "Review"
+  description: "An asset named Review"
+- name: "SubmitDataContractProposal"
+  description: "A transaction named SubmitDataContractProposal"
+- name: "DataInfoSentToConsumer"
+  description: "A transaction named DataInfoSentToConsumer"
+- name: "DataReceivedByConsumer"
+  description: "A transaction named DataReceivedByConsumer"
+- name: "Query"
+  description: "Named queries"
+consumes:
+- "application/json"
+- "application/x-www-form-urlencoded"
+- "application/xml"
+- "text/xml"
+produces:
+- "application/json"
+- "application/xml"
+- "text/xml"
+- "application/javascript"
+- "text/javascript"
+paths:
+
+  /queries/getBusinesses:
+    get:
+      tags:
+      - "Query"
+      summary: "Get the list of all businesses"
+      operationId: "Query.getBusinesses"
+      parameters:
+      - name: "authorization"
+        in: "header"
+        type: string
+      responses:
+        200:
+          description: "Request was successful"
+          schema:
+            $ref: "#/definitions/GetBusinessesResponse"
+
+  /queries/getBusinessesWithPagination:
+    get:
+      tags:
+      - "Query"
+      summary: "Get the list of all businesses with pagination"
+      operationId: "Query.getBusinessesWithPagination"
+      parameters:
+      - name: "pageSize"
+        in: "query"
+        required: true
+        type: integer
+        x-exportParamName: "pageSize"
+      - name: "bookmark"
+        in: "query"
+        required: false
+        type: "string"
+        x-exportParamName: "bookmark"
+      - name: "authorization"
+        in: "header"
+        type: string
+      responses:
+        200:
+          description: "Request was successful"
+          schema:
+              $ref: "#/definitions/GetBusinessesResponse"
+
+  /queries/getDataCategories:
+    get:
+      tags:
+      - "Query"
+      summary: "Get the list of all data categories"
+      operationId: "Query.getDataCategories"
+      parameters:
+      - name: "authorization"
+        in: "header"
+        type: string
+      responses:
+        200:
+          description: "Request was successful"
+          schema:
+              $ref: "#/definitions/GetDataCategoriesResponse"
+
+  /queries/getDataCategoriesWithPagination:
+    get:
+      tags:
+      - "Query"
+      summary: "Get the list of all data categories with pagination"
+      operationId: "Query.getDataCategoriesWithPagination"
+      parameters:
+      - name: "pageSize"
+        in: "query"
+        required: true
+        type: integer
+        x-exportParamName: "pageSize"
+      - name: "bookmark"
+        in: "query"
+        required: false
+        type: "string"
+        x-exportParamName: "bookmark"
+      - name: "authorization"
+        in: "header"
+        type: string
+
+      responses:
+        200:
+          description: "Request was successful"
+          schema:
+              $ref: "#/definitions/GetDataCategoriesResponse"
+
+  /queries/getPopularDataCategories:
+    get:
+      tags:
+      - "Query"
+      summary: "Get the k popular data categories"
+      operationId: "Query.getPopularDataCategories"
+      parameters:
+      - name: "size"
+        in: "query"
+        required: true
+        type: integer
+        x-exportParamName: "size"
+      - name: "authorization"
+        in: "header"
+        type: string
+      responses:
+        200:
+          description: "Request was successful"
+          schema:
+              $ref: "#/definitions/GetDataCategoriesResponse"
+
+  /queries/getDataContractTypes:
+    get:
+      tags:
+      - "Query"
+      summary: "Get the list of all data contract types"
+      operationId: "Query.getDataContractTypes"
+      parameters:
+      - name: "authorization"
+        in: "header"
+        type: string
+      responses:
+        200:
+          description: "Request was successful"
+          schema:
+              $ref: "#/definitions/GetDataContractTypesResponse"
+    
+  /queries/getDataContractTypesAfterTimeStamp:
+    get:
+      tags:
+      - "Query"
+      summary: "Get the list of all data contract types created after a timestamp"
+      operationId: "Query.getDataContractTypesAfterTimeStamp"
+      parameters:
+      - name: "authorization"
+        in: "header"
+        type: string
+      - name: "timestamp"
+        in: "query"
+        type: string
+      responses:
+        200:
+          description: "Request was successful"
+          schema:
+              $ref: "#/definitions/GetDataContractTypesResponse"
+
+  /queries/getDataContractTypesWithPagination:
+    get:
+      tags:
+      - "Query"
+      summary: "Get the list of all data contract types with pagination"
+      operationId: "Query.getDataContractTypesWithPagination"
+      parameters:
+      - name: "pageSize"
+        in: "query"
+        required: true
+        type: integer
+        x-exportParamName: "pageSize"
+      - name: "bookmark"
+        in: "query"
+        required: false
+        type: "string"
+        x-exportParamName: "bookmark"
+      - name: "authorization"
+        in: "header"
+        type: string
+      responses:
+        200:
+          description: "Request was successful"
+          schema:
+              $ref: "#/definitions/GetDataContractTypesResponse"
+ 
+  /queries/getPopularDataContractTypes:
+    get:
+      tags:
+      - "Query"
+      summary: "Get the k popular data contract types"
+      operationId: "Query.getPopularDataContractTypes"
+      parameters:
+      - name: "size"
+        in: "query"
+        required: true
+        type: integer
+        x-exportParamName: "size"
+      - name: "authorization"
+        in: "header"
+        type: string
+      responses:
+        200:
+          description: "Request was successful"
+          schema:
+              $ref: "#/definitions/GetDataContractTypesResponse"
+ 
+  /queries/getRecommendedDataContractType:
+    get:
+      tags:
+      - "Query"
+      summary: "Get the k recommended data contract type"
+      operationId: "Query.getRecommendedDataContractType"
+      parameters:
+      - name: "authorization"
+        in: "header"
+        type: string
+      responses:
+        200:
+          description: "Request was successful"
+          schema:
+              $ref: "#/definitions/GetDataContractTypeResponse"
+
+  /queries/getDataContractTypesByCategory:
+    get:
+      tags:
+      - "Query"
+      summary: "Get data contract types given their data category"
+      operationId: "Query.getDataContractTypesByCategory"
+      parameters:
+      - name: "categoryID"
+        in: "query"
+        required: true
+        type: string
+        x-exportParamName: "categoryID"
+      - name: "authorization"
+        in: "header"
+        type: string
+      responses:
+        200:
+          description: "Request was successful"
+          schema:
+              $ref: "#/definitions/GetDataContractTypesResponse"
+
+
+  /queries/getDataContractTypesByCategoryWithPagination:
+    get:
+      tags:
+      - "Query"
+      summary: "Get data contract types given their data category with pagination"
+      operationId: "Query.getDataContractTypesByCategoryWithPagination"
+      parameters:
+      - name: "categoryID"
+        in: "query"
+        required: true
+        type: string
+        x-exportParamName: "categoryID"
+      - name: "pageSize"
+        in: "query"
+        required: true
+        type: integer
+        x-exportParamName: "pageSize"
+      - name: "bookmark"
+        in: "query"
+        required: false
+        type: "string"
+        x-exportParamName: "bookmark"
+      - name: "authorization"
+        in: "header"
+        type: string
+      responses:
+        200:
+          description: "Request was successful"
+          schema:
+              $ref: "#/definitions/GetDataContractTypesResponse"
+
+  /queries/getDataContractTypesByProvider:
+    get:
+      tags:
+      - "Query"
+      summary: "Get data contract types given their provider"
+      operationId: "Query.getDataContractTypesByProvider"
+      parameters:
+      - name: "providerID"
+        in: "query"
+        required: true
+        type: string
+        x-exportParamName: "providerID"
+      - name: "authorization"
+        in: "header"
+        type: string
+      responses:
+        200:
+          description: "Request was successful"
+          schema:
+              $ref: "#/definitions/GetDataContractTypesResponse"
+
+  /queries/getDataContractTypesByProviderWithPagination:
+    get:
+      tags:
+      - "Query"
+      summary: "Get data contract types given their provider with pagination"
+      operationId: "Query.getDataContractTypesByProviderWithPagination"
+      parameters:
+      - name: "providerID"
+        in: "query"
+        required: true
+        type: string
+        x-exportParamName: "providerID"
+      - name: "pageSize"
+        in: "query"
+        required: true
+        type: integer
+        x-exportParamName: "pageSize"
+      - name: "bookmark"
+        in: "query"
+        required: false
+        type: "string"
+        x-exportParamName: "bookmark"
+      - name: "authorization"
+        in: "header"
+        type: string
+      responses:
+        200:
+          description: "Request was successful"
+          schema:
+              $ref: "#/definitions/GetDataContractTypesResponse"
+
+  /queries/getDataContracts:
+    get:
+      tags:
+      - "Query"
+      summary: "Get the list of all data contracts"
+      operationId: "Query.getDataContracts"
+      parameters:
+      - name: "authorization"
+        in: "header"
+        type: string
+      responses:
+        200:
+          description: "Request was successful"
+          schema:
+              $ref: "#/definitions/GetDataContractsResponse"
+
+  /queries/getDataContractsWithPagination:
+    get:
+      tags:
+      - "Query"
+      summary: "Get the list of all data contracts with pagination"
+      operationId: "Query.getDataContractsWithPagination"
+      parameters:
+      - name: "pageSize"
+        in: "query"
+        required: true
+        type: integer
+        x-exportParamName: "pageSize"
+      - name: "bookmark"
+        in: "query"
+        required: false
+        type: "string"
+        x-exportParamName: "bookmark"
+      - name: "authorization"
+        in: "header"
+        type: string
+      responses:
+        200:
+          description: "Request was successful"
+          schema:
+              $ref: "#/definitions/GetDataContractsResponse"
+
+  /queries/getDataContractsByProvider:
+    get:
+      tags:
+      - "Query"
+      summary: "Get data contracts given their provider"
+      operationId: "Query.getDataContractsByProvider"
+      parameters:
+      - name: "providerID"
+        in: "query"
+        required: true
+        type: string
+        x-exportParamName: "providerID"
+      - name: "authorization"
+        in: "header"
+        type: string
+      responses:
+        200:
+          description: "Request was successful"
+          schema:
+              $ref: "#/definitions/GetDataContractsResponse"
+
+  /queries/getDataContractsByProviderWithPagination:
+    get:
+      tags:
+      - "Query"
+      summary: "Get data contract types given their provider with pagination"
+      operationId: "Query.getDataContractsByProviderWithPagination"
+      parameters:
+      - name: "providerID"
+        in: "query"
+        required: true
+        type: string
+        x-exportParamName: "providerID"
+      - name: "pageSize"
+        in: "query"
+        required: true
+        type: integer
+        x-exportParamName: "pageSize"
+      - name: "bookmark"
+        in: "query"
+        required: false
+        type: "string"
+        x-exportParamName: "bookmark"
+      - name: "authorization"
+        in: "header"
+        type: string
+      responses:
+        200:
+          description: "Request was successful"
+          schema:
+              $ref: "#/definitions/GetDataContractsResponse"
+
+  /queries/getDataContractsByConsumer:
+    get:
+      tags:
+      - "Query"
+      summary: "Get data contracts given their consumer"
+      operationId: "Query.getDataContractsByConsumer"
+      parameters:
+      - name: "consumerID"
+        in: "query"
+        required: true
+        type: string
+        x-exportParamName: "consumerID"
+      - name: "authorization"
+        in: "header"
+        type: string
+      responses:
+        200:
+          description: "Request was successful"
+          schema:
+              $ref: "#/definitions/GetDataContractsResponse"
+
+  /queries/getDataContractsByConsumerWithPagination:
+    get:
+      tags:
+      - "Query"
+      summary: "Get data contract types given their consumer with pagination"
+      operationId: "Query.getDataContractsByConsumerWithPagination"
+      parameters:
+      - name: "consumerID"
+        in: "query"
+        required: true
+        type: string
+        x-exportParamName: "consumerID"
+      - name: "pageSize"
+        in: "query"
+        required: true
+        type: integer
+        x-exportParamName: "pageSize"
+      - name: "bookmark"
+        in: "query"
+        required: false
+        type: "string"
+        x-exportParamName: "bookmark"
+      - name: "authorization"
+        in: "header"
+        type: string
+      responses:
+        200:
+          description: "Request was successful"
+          schema:
+              $ref: "#/definitions/GetDataContractsResponse"
+
+  /queries/selectDataSetContractsToUpload:
+    get:
+      tags:
+      - "Query"
+      summary: "Get data contracts to upload"
+      operationId: "Query.selectDataSetContractsToUpload"
+      parameters:
+      - name: "dataContractTypeID"
+        in: "query"
+        required: true
+        type: string
+        x-exportParamName: "dataContractTypeID"
+      - name: "authorization"
+        in: "header"
+        type: string
+      responses:
+        200:
+          description: "Request was successful"
+          schema:
+              $ref: "#/definitions/GetDataContractsResponse"
+
+  /queries/selectDataSetContractsToUploadWithPagination:
+    get:
+      tags:
+      - "Query"
+      summary: "Get data contracts to upload with pagination"
+      operationId: "Query.selectDataSetContractsToUploadWithPagination"
+      parameters:
+      - name: "dataContractTypeID"
+        in: "query"
+        required: true
+        type: string
+        x-exportParamName: "dataContractTypeID"
+      - name: "pageSize"
+        in: "query"
+        required: true
+        type: integer
+        x-exportParamName: "pageSize"
+      - name: "bookmark"
+        in: "query"
+        required: false
+        type: "string"
+        x-exportParamName: "bookmark"
+      - name: "authorization"
+        in: "header"
+        type: string
+      responses:
+        200:
+          description: "Request was successful"
+          schema:
+              $ref: "#/definitions/GetDataContractsResponse"
+
+
+  /queries/selectBusinessDataSetsToUpload:
+    get:
+      tags:
+      - "Query"
+      summary: "Get data contracts to upload given their provider"
+      operationId: "Query.selectBusinessDataSetsToUpload"
+      parameters:
+      - name: "providerID"
+        in: "query"
+        required: true
+        type: string
+        x-exportParamName: "providerID"
+      - name: "authorization"
+        in: "header"
+        type: string
+      responses:
+        200:
+          description: "Request was successful"
+          schema:
+              $ref: "#/definitions/GetDataContractsResponse"
+
+  /queries/selectBusinessDataSetsToUploadWithPagination:
+    get:
+      tags:
+      - "Query"
+      summary: "Get data contracts to upload given their provider with pagination"
+      operationId: "Query.selectBusinessDataSetsToUploadWithPagination"
+      parameters:
+      - name: "providerID"
+        in: "query"
+        required: true
+        type: string
+        x-exportParamName: "providerID"
+      - name: "pageSize"
+        in: "query"
+        required: true
+        type: integer
+        x-exportParamName: "pageSize"
+      - name: "bookmark"
+        in: "query"
+        required: false
+        type: "string"
+        x-exportParamName: "bookmark"
+      - name: "authorization"
+        in: "header"
+        type: string
+      responses:
+        200:
+          description: "Request was successful"
+          schema:
+              $ref: "#/definitions/GetDataContractsResponse"
+
+  /queries/selectBusinessDataSetsByDataContractType:
+    get:
+      tags:
+      - "Query"
+      summary: "Get data contracts given their contractType"
+      operationId: "Query.selectBusinessDataSetsByDataContractType"
+      parameters:
+      - name: "dataContractType"
+        in: "query"
+        required: true
+        type: string
+        x-exportParamName: "dataContractType"
+      - name: "authorization"
+        in: "header"
+        type: string
+      responses:
+        200:
+          description: "Request was successful"
+          schema:
+              $ref: "#/definitions/GetDataContractsResponse"
+
+  /queries/selectBusinessDataSetsByDataContractTypeWithPagination:
+    get:
+      tags:
+      - "Query"
+      summary: "Get data contracts given their contractType with pagination"
+      operationId: "Query.selectBusinessDataSetsByDataContractTypeWithPagination"
+      parameters:
+      - name: "dataContractType"
+        in: "query"
+        required: true
+        type: string
+        x-exportParamName: "dataContractType"
+      - name: "pageSize"
+        in: "query"
+        required: true
+        type: integer
+        x-exportParamName: "pageSize"
+      - name: "bookmark"
+        in: "query"
+        required: false
+        type: "string"
+        x-exportParamName: "bookmark"
+      - name: "authorization"
+        in: "header"
+        type: string
+      responses:
+        200:
+          description: "Request was successful"
+          schema:
+              $ref: "#/definitions/GetDataContractsResponse"
+
+
+
+  /queries/selectBusinessDataSetsToUploadByDataContractType:
+    get:
+      tags:
+      - "Query"
+      summary: "Get data contracts to upload given their contractType"
+      operationId: "Query.selectBusinessDataSetsToUploadByDataContractType"
+      parameters:
+      - name: "dataContractType"
+        in: "query"
+        required: true
+        type: string
+        x-exportParamName: "dataContractType"
+      - name: "authorization"
+        in: "header"
+        type: string
+      responses:
+        200:
+          description: "Request was successful"
+          schema:
+              $ref: "#/definitions/GetDataContractsResponse"
+
+  /queries/selectBusinessDataSetsToUploadByDataContractTypeWithPagination:
+    get:
+      tags:
+      - "Query"
+      summary: "Get data contracts to upload given their contractType with pagination"
+      operationId: "Query.selectBusinessDataSetsToUploadByDataContractTypeWithPagination"
+      parameters:
+      - name: "dataContractType"
+        in: "query"
+        required: true
+        type: string
+        x-exportParamName: "dataContractType"
+      - name: "pageSize"
+        in: "query"
+        required: true
+        type: integer
+        x-exportParamName: "pageSize"
+      - name: "bookmark"
+        in: "query"
+        required: false
+        type: "string"
+        x-exportParamName: "bookmark"
+      - name: "authorization"
+        in: "header"
+        type: string
+      responses:
+        200:
+          description: "Request was successful"
+          schema:
+              $ref: "#/definitions/GetDataContractsResponse"
+  /queries/selectNumberOfBusinessDataSetsToUpload:
+    get:
+      tags:
+      - "Query"
+      summary: "Get number of data contracts to upload given their provider"
+      operationId: "Query.selectNumberOfBusinessDataSetsToUpload"
+      parameters:
+      - name: "providerID"
+        in: "query"
+        required: true
+        type: string
+        x-exportParamName: "providerID"
+      - name: "authorization"
+        in: "header"
+        type: string
+      responses:
+        200:
+          description: "Request was successful"
+          schema:
+            type: "integer"
+
+  /queries/selectBusinessDataSetsSoldShippedNotDownloaded:
+    get:
+      tags:
+      - "Query"
+      summary: "Get data contracts uploaded and not downloaded by consumer given their provider"
+      operationId: "Query.selectBusinessDataSetsSoldShippedNotDownloaded"
+      parameters:
+      - name: "providerID"
+        in: "query"
+        required: true
+        type: string
+        x-exportParamName: "providerID"
+      - name: "today"
+        in: "query"
+        required: true
+        type: "string"
+        format: "date-time"
+        x-exportParamName: "Today"
+      - name: "authorization"
+        in: "header"
+        type: string
+      responses:
+        200:
+          description: "Request was successful"
+          schema:
+              $ref: "#/definitions/GetDataContractsResponse"
+
+  /queries/selectBusinessDataSetsSoldShippedNotDownloadedWithPagination:
+    get:
+      tags:
+      - "Query"
+      summary: "Get data contracts uploaded and not downloaded by consumer given their provider with pagination"
+      operationId: "Query.selectBusinessDataSetsSoldShippedNotDownloadedWithPagination"
+      parameters:
+      - name: "providerID"
+        in: "query"
+        required: true
+        type: string
+        x-exportParamName: "providerID"
+      - name: "today"
+        in: "query"
+        required: true
+        type: "string"
+        format: "date-time"
+        x-exportParamName: "Today"
+      - name: "pageSize"
+        in: "query"
+        required: true
+        type: integer
+        x-exportParamName: "pageSize"
+      - name: "bookmark"
+        in: "query"
+        required: false
+        type: "string"
+        x-exportParamName: "bookmark"
+      - name: "authorization"
+        in: "header"
+        type: string
+      responses:
+        200:
+          description: "Request was successful"
+          schema:
+              $ref: "#/definitions/GetDataContractsResponse"
+
+  /queries/selectBusinessDataSetsSoldAndDownloaded:
+    get:
+      tags:
+      - "Query"
+      summary: "Get data contracts uploaded and downloaded by consumer given their provider"
+      operationId: "Query.selectBusinessDataSetsSoldAndDownloaded"
+      parameters:
+      - name: "providerID"
+        in: "query"
+        required: true
+        type: string
+        x-exportParamName: "providerID"
+      - name: "today"
+        in: "query"
+        required: true
+        type: "string"
+        format: "date-time"
+        x-exportParamName: "Today"
+      - name: "authorization"
+        in: "header"
+        type: string
+      responses:
+        200:
+          description: "Request was successful"
+          schema:
+              $ref: "#/definitions/GetDataContractsResponse"
+
+  /queries/selectBusinessDataSetsSoldAndDownloadedWithPagination:
+    get:
+      tags:
+      - "Query"
+      summary: "Get data contracts uploaded and downloaded by consumer given their provider with pagination"
+      operationId: "Query.selectBusinessDataSetsSoldAndDownloadedWithPagination"
+      parameters:
+      - name: "providerID"
+        in: "query"
+        required: true
+        type: string
+        x-exportParamName: "providerID"
+      - name: "today"
+        in: "query"
+        required: true
+        type: "string"
+        format: "date-time"
+        x-exportParamName: "Today"
+      - name: "pageSize"
+        in: "query"
+        required: true
+        type: integer
+        x-exportParamName: "pageSize"
+      - name: "bookmark"
+        in: "query"
+        required: false
+        type: "string"
+        x-exportParamName: "bookmark"
+      - name: "authorization"
+        in: "header"
+        type: string
+      responses:
+        200:
+          description: "Request was successful"
+          schema:
+              $ref: "#/definitions/GetDataContractsResponse"
+
+  /queries/selectBusinessDataSetsPurchasedNotUploaded:
+    get:
+      tags:
+      - "Query"
+      summary: "Get data contracts purshased and not uploaded by provider given their consumer"
+      operationId: "Query.selectBusinessDataSetsPurchasedNotUploaded"
+      parameters:
+      - name: "consumerID"
+        in: "query"
+        required: true
+        type: string
+        x-exportParamName: "consumerID"
+      - name: "authorization"
+        in: "header"
+        type: string
+      responses:
+        200:
+          description: "Request was successful"
+          schema:
+              $ref: "#/definitions/GetDataContractsResponse"
+
+  /queries/selectBusinessDataSetsPurchasedNotUploadedWithPagination:
+    get:
+      tags:
+      - "Query"
+      summary: "Get data contracts purshased and not uploaded by provider given their consumer with pagination"
+      operationId: "Query.selectBusinessDataSetsPurchasedNotUploadedWithPagination"
+      parameters:
+      - name: "consumerID"
+        in: "query"
+        required: true
+        type: string
+        x-exportParamName: "consumerID"
+      - name: "pageSize"
+        in: "query"
+        required: true
+        type: integer
+        x-exportParamName: "pageSize"
+      - name: "bookmark"
+        in: "query"
+        required: false
+        type: "string"
+        x-exportParamName: "bookmark"
+      - name: "authorization"
+        in: "header"
+        type: string
+      responses:
+        200:
+          description: "Request was successful"
+          schema:
+              $ref: "#/definitions/GetDataContractsResponse"
+
+
+  /queries/selectBusinessDataSetsPurchasedUploadedNotDownloaded:
+    get:
+      tags:
+      - "Query"
+      summary: "Get data contracts uploaded by provider and not downloaded given their consumer"
+      operationId: "Query.selectBusinessDataSetsPurchasedUploadedNotDownloaded"
+      parameters:
+      - name: "consumerID"
+        in: "query"
+        required: true
+        type: string
+        x-exportParamName: "consumerID"
+      - name: "today"
+        in: "query"
+        required: true
+        type: "string"
+        format: "date-time"
+        x-exportParamName: "Today"
+      - name: "authorization"
+        in: "header"
+        type: string
+      responses:
+        200:
+          description: "Request was successful"
+          schema:
+              $ref: "#/definitions/GetDataContractsResponse"
+
+  /queries/selectBusinessDataSetsPurchasedUploadedNotDownloadedWithPagination:
+    get:
+      tags:
+      - "Query"
+      summary: "Get data contracts uploaded by provider and not downloaded given their consumer with pagination"
+      operationId: "Query.SelectBusinessDataSetsPurchasedUploadedNotDownloadedWithPagination"
+      parameters:
+      - name: "consumerID"
+        in: "query"
+        required: true
+        type: string
+        x-exportParamName: "consumerID"
+      - name: "today"
+        in: "query"
+        required: true
+        type: "string"
+        format: "date-time"
+        x-exportParamName: "Today"
+      - name: "pageSize"
+        in: "query"
+        required: true
+        type: integer
+        x-exportParamName: "pageSize"
+      - name: "bookmark"
+        in: "query"
+        required: false
+        type: "string"
+        x-exportParamName: "bookmark"
+      - name: "authorization"
+        in: "header"
+        type: string
+      responses:
+        200:
+          description: "Request was successful"
+          schema:
+              $ref: "#/definitions/GetDataContractsResponse"
+
+  /queries/selectBusinessDataSetsPurchasedDownloaded:
+    get:
+      tags:
+      - "Query"
+      summary: "Get data contracts uploaded by provider and downloaded given their consumer"
+      operationId: "Query.selectBusinessDataSetsPurchasedDownloaded"
+      parameters:
+      - name: "consumerID"
+        in: "query"
+        required: true
+        type: string
+        x-exportParamName: "consumerID"
+      - name: "today"
+        in: "query"
+        required: true
+        type: "string"
+        format: "date-time"
+        x-exportParamName: "Today"
+      - name: "authorization"
+        in: "header"
+        type: string
+      responses:
+        200:
+          description: "Request was successful"
+          schema:
+              $ref: "#/definitions/GetDataContractsResponse"
+
+  /queries/selectBusinessDataSetsPurchasedDownloadedWithPagination:
+    get:
+      tags:
+      - "Query"
+      summary: "Get data contracts uploaded by provider and downloaded given their consumer with pagination"
+      operationId: "Query.selectBusinessDataSetsPurchasedDownloadedWithPagination"
+      parameters:
+      - name: "consumerID"
+        in: "query"
+        required: true
+        type: string
+        x-exportParamName: "consumerID"
+      - name: "today"
+        in: "query"
+        required: true
+        type: "string"
+        format: "date-time"
+        x-exportParamName: "Today"
+      - name: "pageSize"
+        in: "query"
+        required: true
+        type: integer
+        x-exportParamName: "pageSize"
+      - name: "bookmark"
+        in: "query"
+        required: false
+        type: "string"
+        x-exportParamName: "bookmark"
+      - name: "authorization"
+        in: "header"
+        type: string
+      responses:
+        200:
+          description: "Request was successful"
+          schema:
+              $ref: "#/definitions/GetDataContractsResponse"
+
+  # /queries/getPersons:
+  #   get:
+  #     tags:
+  #     - "Query"
+  #     summary: "Get the list of all persons"
+  #     operationId: "Query.getPersons"
+  #     responses:
+  #       200:
+  #         description: "Request was successful"
+  #         schema:
+  #             $ref: "#/definitions/GetPersonsResponse"
+
+  # /queries/getPersonsWithPagination:
+  #   get:
+  #     tags:
+  #     - "Query"
+  #     summary: "Get the list of all persons with pagination"
+  #     operationId: "Query.getPersonsWithPagination"
+  #     parameters:
+  #     - name: "pageSize"
+  #       in: "query"
+  #       required: true
+  #       type: integer
+  #       x-exportParamName: "pageSize"
+  #     - name: "bookmark"
+  #       in: "query"
+  #       required: false
+  #       type: "string"
+  #       x-exportParamName: "bookmark"
+  #     responses:
+  #       200:
+  #         description: "Request was successful"
+  #         schema:
+  #             $ref: "#/definitions/GetPersonsResponse"
+
+  # /queries/getReviews:
+  #   get:
+  #     tags:
+  #     - "Query"
+  #     summary: "Get the list of all reviews"
+  #     operationId: "Query.getReviews"
+  #     responses:
+  #       200:
+  #         description: "Request was successful"
+  #         schema:
+  #             $ref: "#/definitions/GetReviewsResponse"
+
+  # /queries/getReviewsWithPagination:
+  #   get:
+  #     tags:
+  #     - "Query"
+  #     summary: "Get the list of all reviews with pagination"
+  #     operationId: "Query.getReviewsWithPagination"
+  #     parameters:
+  #     - name: "pageSize"
+  #       in: "query"
+  #       required: true
+  #       type: integer
+  #       x-exportParamName: "pageSize"
+  #     - name: "bookmark"
+  #       in: "query"
+  #       required: false
+  #       type: "string"
+  #       x-exportParamName: "bookmark"
+  #     responses:
+  #       200:
+  #         description: "Request was successful"
+  #         schema:
+  #             $ref: "#/definitions/GetReviewsResponse"
+
+  /Business:
+    post:
+      tags:
+      - "Business"
+      summary: "Create a new instance of the model and persist it into the data source."
+      operationId: "Business.create"
+      parameters:
+      - in: "body"
+        name: "data"
+        description: "Model instance data"
+        required: false
+        schema:
+          $ref: "#/definitions/Business"
+        x-exportParamName: "Data"
+      - name: "authorization"
+        in: "header"
+        type: string
+      responses:
+        200:
+          description: "Request was successful"
+          schema:
+            $ref: "#/definitions/Business"
+ 
+  /Business/{id}:
+    get:
+      tags:
+      - "Business"
+      summary: "Find a model instance by {{id}} from the data source."
+      operationId: "Business.findById"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "Model id"
+        required: true
+        type: "string"
+        format: "JSON"
+        x-exportParamName: "Id"
+      - name: "filter"
+        in: "query"
+        description: "Filter defining fields and include - must be a JSON-encoded\
+          \ string ({\"something\":\"value\"})"
+        required: false
+        type: "string"
+        format: "JSON"
+        x-exportParamName: "Filter"
+      - name: "authorization"
+        in: "header"
+        type: string
+      responses:
+        200:
+          description: "Request was successful"
+          schema:
+            $ref: "#/definitions/GetBusinessResponse"
+
+    put:
+      tags:
+      - "Business"
+      summary: "Replace attributes for a model instance and persist it into the data\
+        \ source."
+      operationId: "Business.replaceById"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "Model id"
+        required: true
+        type: "string"
+        format: "JSON"
+        x-exportParamName: "Id"
+      - in: "body"
+        name: "data"
+        description: "Model instance data"
+        required: false
+        schema:
+          $ref: "#/definitions/Business"
+        x-exportParamName: "Data"
+      - name: "authorization"
+        in: "header"
+        type: string
+      responses:
+        200:
+          description: "Request was successful"
+          schema:
+            $ref: "#/definitions/Business"
+    delete:
+      tags:
+      - "Business"
+      summary: "Delete a model instance by {{id}} from the data source."
+      operationId: "Business.deleteById"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "Model id"
+        required: true
+        type: "string"
+        format: "JSON"
+        x-exportParamName: "Id"
+      - name: "authorization"
+        in: "header"
+        type: string
+      responses:
+        200:
+          description: "Request was successful"
+          schema:
+            type: "object"
+            properties: {}
+  /Person:
+    post:
+      tags:
+      - "Person"
+      summary: "Create a new instance of the model and persist it into the data source."
+      operationId: "Person.create"
+      parameters:
+      - in: "body"
+        name: "data"
+        description: "Model instance data"
+        required: false
+        schema:
+          $ref: "#/definitions/Person"
+        x-exportParamName: "Data"
+      - name: "authorization"
+        in: "header"
+        type: string
+      responses:
+        200:
+          description: "Request was successful"
+          schema:
+            $ref: "#/definitions/Person"
+  /Person/{id}:
+    get:
+      tags:
+      - "Person"
+      summary: "Find a model instance by {{id}} from the data source."
+      operationId: "Person.findById"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "Model id"
+        required: true
+        type: "string"
+        format: "JSON"
+        x-exportParamName: "Id"
+      - name: "filter"
+        in: "query"
+        description: "Filter defining fields and include - must be a JSON-encoded\
+          \ string ({\"something\":\"value\"})"
+        required: false
+        type: "string"
+        format: "JSON"
+        x-exportParamName: "Filter"
+      - name: "authorization"
+        in: "header"
+        type: string
+      responses:
+        200:
+          description: "Request was successful"
+          schema:
+            $ref: "#/definitions/GetPersonResponse"
+    put:
+      tags:
+      - "Person"
+      summary: "Replace attributes for a model instance and persist it into the data\
+        \ source."
+      operationId: "Person.replaceById"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "Model id"
+        required: true
+        type: "string"
+        format: "JSON"
+        x-exportParamName: "Id"
+      - in: "body"
+        name: "data"
+        description: "Model instance data"
+        required: false
+        schema:
+          $ref: "#/definitions/Person"
+        x-exportParamName: "Data"
+      - name: "authorization"
+        in: "header"
+        type: string
+      responses:
+        200:
+          description: "Request was successful"
+          schema:
+            $ref: "#/definitions/Person"
+    delete:
+      tags:
+      - "Person"
+      summary: "Delete a model instance by {{id}} from the data source."
+      operationId: "Person.deleteById"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "Model id"
+        required: true
+        type: "string"
+        format: "JSON"
+        x-exportParamName: "Id"
+      - name: "authorization"
+        in: "header"
+        type: string
+      responses:
+        200:
+          description: "Request was successful"
+          schema:
+            type: "object"
+            properties: {}
+  /DataCategory:
+    post:
+      tags:
+      - "DataCategory"
+      summary: "Create a new instance of the model and persist it into the data source."
+      operationId: "DataCategory.create"
+      parameters:
+      - in: "body"
+        name: "data"
+        description: "Model instance data"
+        required: false
+        schema:
+          $ref: "#/definitions/DataCategory"
+        x-exportParamName: "Data"
+      - name: "authorization"
+        in: "header"
+        type: string
+      responses:
+        200:
+          description: "Request was successful"
+          schema:
+            $ref: "#/definitions/DataCategory"
+  /DataCategory/{id}:
+    get:
+      tags:
+      - "DataCategory"
+      summary: "Find a model instance by {{id}} from the data source."
+      operationId: "DataCategory.findById"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "Model id"
+        required: true
+        type: "string"
+        format: "JSON"
+        x-exportParamName: "Id"
+      - name: "filter"
+        in: "query"
+        description: "Filter defining fields and include - must be a JSON-encoded\
+          \ string ({\"something\":\"value\"})"
+        required: false
+        type: "string"
+        format: "JSON"
+        x-exportParamName: "Filter"
+      - name: "authorization"
+        in: "header"
+        type: string
+      responses:
+        200:
+          description: "Request was successful"
+          schema:
+            $ref: "#/definitions/GetDataCategoryResponse"
+    put:
+      tags:
+      - "DataCategory"
+      summary: "Replace attributes for a model instance and persist it into the data\
+        \ source."
+      operationId: "DataCategory.replaceById"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "Model id"
+        required: true
+        type: "string"
+        format: "JSON"
+        x-exportParamName: "Id"
+      - in: "body"
+        name: "data"
+        description: "Model instance data"
+        required: false
+        schema:
+          $ref: "#/definitions/DataCategory"
+        x-exportParamName: "Data"
+      - name: "authorization"
+        in: "header"
+        type: string
+      responses:
+        200:
+          description: "Request was successful"
+          schema:
+            $ref: "#/definitions/DataCategory"
+    delete:
+      tags:
+      - "DataCategory"
+      summary: "Delete a model instance by {{id}} from the data source."
+      operationId: "DataCategory.deleteById"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "Model id"
+        required: true
+        type: "string"
+        format: "JSON"
+        x-exportParamName: "Id"
+      - name: "authorization"
+        in: "header"
+        type: string
+      responses:
+        200:
+          description: "Request was successful"
+          schema:
+            type: "object"
+            properties: {}
+  /DataContractType:
+    post:
+      tags:
+      - "DataContractType"
+      summary: "Create a new instance of the model and persist it into the data source."
+      operationId: "DataContractType.create"
+      parameters:
+      - in: "body"
+        name: "data"
+        description: "Model instance data"
+        required: false
+        schema:
+          $ref: "#/definitions/DataContractType"
+        x-exportParamName: "Data"
+      - name: "authorization"
+        in: "header"
+        type: string
+      responses:
+        200:
+          description: "Request was successful"
+          schema:
+            $ref: "#/definitions/DataContractType"
+  /DataContractType/{id}:
+    get:
+      tags:
+      - "DataContractType"
+      summary: "Find a model instance by {{id}} from the data source."
+      operationId: "DataContractType.findById"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "Model id"
+        required: true
+        type: "string"
+        format: "JSON"
+        x-exportParamName: "Id"
+      - name: "filter"
+        in: "query"
+        description: "Filter defining fields and include - must be a JSON-encoded\
+          \ string ({\"something\":\"value\"})"
+        required: false
+        type: "string"
+        format: "JSON"
+        x-exportParamName: "Filter"
+      - name: "authorization"
+        in: "header"
+        type: string
+      responses:
+        200:
+          description: "Request was successful"
+          schema:
+            $ref: "#/definitions/GetDataContractTypeResponse"
+    put:
+      tags:
+      - "DataContractType"
+      summary: "Replace attributes for a model instance and persist it into the data\
+        \ source."
+      operationId: "DataContractType.replaceById"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "Model id"
+        required: true
+        type: "string"
+        format: "JSON"
+        x-exportParamName: "Id"
+      - in: "body"
+        name: "data"
+        description: "Model instance data"
+        required: false
+        schema:
+          $ref: "#/definitions/DataContractType"
+        x-exportParamName: "Data"
+      - name: "authorization"
+        in: "header"
+        type: string
+      responses:
+        200:
+          description: "Request was successful"
+          schema:
+            $ref: "#/definitions/DataContractType"
+    delete:
+      tags:
+      - "DataContractType"
+      summary: "Delete a model instance by {{id}} from the data source."
+      operationId: "DataContractType.deleteById"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "Model id"
+        required: true
+        type: "string"
+        format: "JSON"
+        x-exportParamName: "Id"
+      - name: "authorization"
+        in: "header"
+        type: string
+      responses:
+        200:
+          description: "Request was successful"
+          schema:
+            type: "object"
+            properties: {}
+  /DataContract:
+    post:
+      tags:
+      - "DataContract"
+      summary: "Create a new instance of the model and persist it into the data source."
+      operationId: "DataContract.create"
+      parameters:
+      - in: "body"
+        name: "data"
+        description: "Model instance data"
+        required: false
+        schema:
+          $ref: "#/definitions/DataContract"
+        x-exportParamName: "Data"
+      - name: "authorization"
+        in: "header"
+        type: string
+      responses:
+        200:
+          description: "Request was successful"
+          schema:
+            $ref: "#/definitions/DataContract"
+  /DataContract/{id}:
+    get:
+      tags:
+      - "DataContract"
+      summary: "Find a model instance by {{id}} from the data source."
+      operationId: "DataContract.findById"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "Model id"
+        required: true
+        type: "string"
+        format: "JSON"
+        x-exportParamName: "Id"
+      - name: "filter"
+        in: "query"
+        description: "Filter defining fields and include - must be a JSON-encoded\
+          \ string ({\"something\":\"value\"})"
+        required: false
+        type: "string"
+        format: "JSON"
+        x-exportParamName: "Filter"
+      - name: "authorization"
+        in: "header"
+        type: string
+      responses:
+        200:
+          description: "Request was successful"
+          schema:
+            $ref: "#/definitions/GetDataContractResponse"
+    put:
+      tags:
+      - "DataContract"
+      summary: "Replace attributes for a model instance and persist it into the data\
+        \ source."
+      operationId: "DataContract.replaceById"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "Model id"
+        required: true
+        type: "string"
+        format: "JSON"
+        x-exportParamName: "Id"
+      - in: "body"
+        name: "data"
+        description: "Model instance data"
+        required: false
+        schema:
+          $ref: "#/definitions/DataContract"
+        x-exportParamName: "Data"
+      - name: "authorization"
+        in: "header"
+        type: string
+      responses:
+        200:
+          description: "Request was successful"
+          schema:
+            $ref: "#/definitions/DataContract"
+    delete:
+      tags:
+      - "DataContract"
+      summary: "Delete a model instance by {{id}} from the data source."
+      operationId: "DataContract.deleteById"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "Model id"
+        required: true
+        type: "string"
+        format: "JSON"
+        x-exportParamName: "Id"
+      - name: "authorization"
+        in: "header"
+        type: string
+      responses:
+        200:
+          description: "Request was successful"
+          schema:
+            type: "object"
+            properties: {}
+  /Review:
+    post:
+      tags:
+      - "Review"
+      summary: "Create a new instance of the model and persist it into the data source."
+      operationId: "Review.create"
+      parameters:
+      - in: "body"
+        name: "data"
+        description: "Model instance data"
+        required: false
+        schema:
+          $ref: "#/definitions/Review"
+        x-exportParamName: "Data"
+      - name: "authorization"
+        in: "header"
+        type: string
+      responses:
+        200:
+          description: "Request was successful"
+          schema:
+            $ref: "#/definitions/Review"
+  /Review/{id}:
+    get:
+      tags:
+      - "Review"
+      summary: "Find a model instance by {{id}} from the data source."
+      operationId: "Review.findById"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "Model id"
+        required: true
+        type: "string"
+        format: "JSON"
+        x-exportParamName: "Id"
+      - name: "filter"
+        in: "query"
+        description: "Filter defining fields and include - must be a JSON-encoded\
+          \ string ({\"something\":\"value\"})"
+        required: false
+        type: "string"
+        format: "JSON"
+        x-exportParamName: "Filter"
+      - name: "authorization"
+        in: "header"
+        type: string
+      responses:
+        200:
+          description: "Request was successful"
+          schema:
+            $ref: "#/definitions/GetReviewResponse"
+    put:
+      tags:
+      - "Review"
+      summary: "Replace attributes for a model instance and persist it into the data\
+        \ source."
+      operationId: "Review.replaceById"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "Model id"
+        required: true
+        type: "string"
+        format: "JSON"
+        x-exportParamName: "Id"
+      - in: "body"
+        name: "data"
+        description: "Model instance data"
+        required: false
+        schema:
+          $ref: "#/definitions/Review"
+        x-exportParamName: "Data"
+      - name: "authorization"
+        in: "header"
+        type: string
+      responses:
+        200:
+          description: "Request was successful"
+          schema:
+            $ref: "#/definitions/Review"
+    delete:
+      tags:
+      - "Review"
+      summary: "Delete a model instance by {{id}} from the data source."
+      operationId: "Review.deleteById"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "Model id"
+        required: true
+        type: "string"
+        format: "JSON"
+        x-exportParamName: "Id"
+      - name: "authorization"
+        in: "header"
+        type: string
+      responses:
+        200:
+          description: "Request was successful"
+          schema:
+            type: "object"
+            properties: {}
+  /SubmitDataContractProposal:
+    post:
+      tags:
+      - "SubmitDataContractProposal"
+      summary: "Create a new instance of the model and persist it into the data source."
+      operationId: "SubmitDataContractProposal.create"
+      parameters:
+      - in: "body"
+        name: "data"
+        description: "Model instance data"
+        required: false
+        schema:
+          $ref: "#/definitions/SubmitDataContractProposal"
+        x-exportParamName: "Data"
+      - name: "authorization"
+        in: "header"
+        type: string
+      responses:
+        200:
+          description: "Request was successful"
+          schema:
+            $ref: "#/definitions/SubmitDataContractProposal"
+
+  /DataInfoSentToConsumer:
+    post:
+      tags:
+      - "DataInfoSentToConsumer"
+      summary: "Create a new instance of the model and persist it into the data source."
+      operationId: "DataInfoSentToConsumer.create"
+      parameters:
+      - in: "body"
+        name: "data"
+        description: "Model instance data"
+        required: false
+        schema:
+          $ref: "#/definitions/DataInfoSentToConsumer"
+        x-exportParamName: "Data"
+      - name: "authorization"
+        in: "header"
+        type: string
+      responses:
+        200:
+          description: "Request was successful"
+          schema:
+            $ref: "#/definitions/DataInfoSentToConsumer"
+
+  /DataReceivedByConsumer:
+    post:
+      tags:
+      - "DataReceivedByConsumer"
+      summary: "Create a new instance of the model and persist it into the data source."
+      operationId: "DataReceivedByConsumer.create"
+      parameters:
+      - in: "body"
+        name: "data"
+        description: "Model instance data"
+        required: false
+        schema:
+          $ref: "#/definitions/DataReceivedByConsumer"
+        x-exportParamName: "Data"
+      - name: "authorization"
+        in: "header"
+        type: string
+      responses:
+        200:
+          description: "Request was successful"
+          schema:
+            $ref: "#/definitions/DataReceivedByConsumer"
+
+definitions:
+  GetReviewResponse:
+    type: "object"
+    properties:
+     response:
+       $ref: "#/definitions/Review"
+     error:
+       type: string  
+  # GetReviewsResponse:
+  #   type: "object"
+  #   properties:
+  #    response:
+  #     type: array
+  #     items:
+  #      $ref: "#/definitions/Review"
+  #    responseMetadata:
+  #     type: array
+  #     items:
+  #      $ref: "#/definitions/ResponseMetadata"  
+  #    error:
+  #     type: string 
+  Review:
+    type: "object"
+    required:
+    - "dataContract"
+    - "id"
+    - "reviewText"
+    - "reviewer"
+    - "score"
+    properties:
+      docType:
+        type: "string"
+        description: "The docType identifier for this type"
+        default: "com.lge.svl.datamarketplace.contract.Review"
+      id:
+        type: "string"
+        description: "The instance identifier for this type"
+      reviewText:
+        type: "string"
+      score:
+        type: "number"
+        format: "double"
+      dataContract:
+        type: "string"
+        description: "The identifier of an instance of dataContract"
+      reviewer:
+        type: "string"
+        description: "The identifier of an instance of reviewer"
+      dataContractType:
+        type: "string"
+        description: "The identifier of an instance of dataContractType"
+    description: "An asset named Review"
+    example:
+      score: 0.80082819046101150206595775671303272247314453125
+      docType: "com.lge.svl.datamarketplace.contract.Review"
+      id: "id"
+      reviewer: "reviewer"
+      dataContract: "dataContract"
+      reviewText: "reviewText"
+      dataContractType: "dataContractType"
+  
+  GetDataContractResponse:
+    type: "object"
+    properties:
+     response:
+       $ref: "#/definitions/DataContract"
+     error:
+       type: string  
+  
+  GetDataContractsResponse:
+    type: "object"
+    properties:
+     response:
+      type: array
+      items:
+       $ref: "#/definitions/DataContract"
+     responseMetadata:
+      type: array
+      items:
+       $ref: "#/definitions/ResponseMetadata"  
+     error:
+       type: string    
+  
+  DataContract:
+    type: "object"
+    required:
+    - "consumer"
+    - "creationDateTime"
+    - "dataContractType"
+    - "extras"
+    - "id"
+    properties:
+      docType:
+        type: "string"
+        description: "The class identifier for this type"
+        default: "com.lge.svl.datamarketplace.contract.DataContract"
+      id:
+        type: "string"
+        description: "The instance identifier for this type"
+      provider:
+        type: "string"
+        description: "The identifier of an instance of provider"
+      consumer:
+        type: "string"
+        description: "The identifier of an instance of consumer"
+      creationDateTime:
+        type: "string"
+        format: "date-time"
+      extras:
+        $ref: "#/definitions/ContractExtras"
+      dataContractType:
+        type: "string"
+        description: "The identifier of an instance of dataContractType"
+    description: "An asset named DataContract"
+    example:
+      provider: "provider"
+      docType: "com.lge.svl.datamarketplace.contract.DataContract"
+      extras:
+        definition_format: "definition_format"
+        fileStatus: "PROPOSAL"
+        docType: "com.lge.svl.datamarketplace.contract.ContractExtras"
+        fileHash:
+          method: "md5"
+          id: "id"
+          value: "value"
+        id: "id"
+        streamEndDateTime: "2000-01-23T04:56:07.000+00:00"
+      id: "id"
+      consumer: "consumer"
+      dataContractType: "dataContractType"
+      creationDateTime: "2000-01-23T04:56:07.000+00:00"
+  
+  GetBusinessResponse:
+    type: "object"
+    properties:
+     response:
+       $ref: "#/definitions/Business"
+     error:
+       type: string
+
+  GetBusinessesResponse:
+    type: "object"
+    properties:
+     response:
+      type: array
+      items:
+       $ref: "#/definitions/Business"
+     responseMetadata:
+      type: array
+      items:
+       $ref: "#/definitions/ResponseMetadata"  
+     error:
+       type: string  
+  
+  Business:
+    type: "object"
+    required:
+    - "accountBalance"
+    - "address"
+    - "id"
+    - "name"
+    - "numberOfReviews"
+    - "publicKey"
+    - "score"
+    properties:
+      docType:
+        type: "string"
+        description: "The class identifier for this type"
+        default: "com.lge.svl.datamarketplace.contract.Business"
+      id:
+        type: "string"
+        description: "The instance identifier for this type"
+      emailDomain:
+        type: "string"
+        description: "The email domain of the business"
+      openIdProviderURL:
+        type: "string"
+        description: "A URL to the openID iedntity provider"
+      name:
+        type: "string"
+      address:
+        $ref: "#/definitions/Address"
+      accountBalance:
+        type: "number"
+        format: "double"
+      publicKey:
+        type: "string"
+      reviews:
+        type: "array"
+        items:
+          $ref: "#/definitions/Review"
+      score:
+        type: "number"
+        format: "double"
+        default: 3
+      numberOfReviews:
+        type: "number"
+        format: "double"
+        default: 0
+      persons:
+        type: "array"
+        items:
+          $ref: "#/definitions/Person"
+    description: "A participant named Business"
+    example:
+      score: 6.02745618307040320615897144307382404804229736328125
+      persons:
+      - role: {}
+        docType: "com.lge.svl.datamarketplace.contract.Person"
+        businessID: "businessID"
+        id: "id"
+      - role: {}
+        docType: "com.lge.svl.datamarketplace.contract.Person"
+        businessID: "businessID"
+        id: "id"
+      emailDomain: "emailDomain"
+      address:
+        zip: "zip"
+        country: "country"
+        city: "city"
+        docType: "com.lge.svl.datamarketplace.contract.Address"
+        street: "street"
+        id: "id"
+      reviews:
+      - score: 0.80082819046101150206595775671303272247314453125
+        docType: "com.lge.svl.datamarketplace.contract.Review"
+        id: "id"
+        reviewer: "reviewer"
+        dataContract: "dataContract"
+        reviewText: "reviewText"
+        dataContractType: "dataContractType"
+      - score: 0.80082819046101150206595775671303272247314453125
+        docType: "com.lge.svl.datamarketplace.contract.Review"
+        id: "id"
+        reviewer: "reviewer"
+        dataContract: "dataContract"
+        reviewText: "reviewText"
+        dataContractType: "dataContractType"
+      docType: "com.lge.svl.datamarketplace.contract.Business"
+      numberOfReviews: 1.46581298050294517310021547018550336360931396484375
+      openIdProviderURL: "openIdProviderURL"
+      name: "name"
+      id: "id"
+      publicKey: "publicKey"
+      accountBalance: 0.80082819046101150206595775671303272247314453125
+    
+  GetPersonResponse:
+    type: "object"
+    properties:
+     response:
+       $ref: "#/definitions/Person"
+     error:
+       type: string  
+       
+  # GetPersonsResponse:
+  #   type: "object"
+  #   properties:
+  #    response:
+  #     type: array
+  #     items:
+  #      $ref: "#/definitions/Person"
+  #    responseMetadata:
+  #     type: array
+  #     items:
+  #      $ref: "#/definitions/ResponseMetadata"  
+  #    error:
+  #      type: string  
+       
+  Person:
+    type: "object"
+    required:
+    - "id"
+    properties:
+      docType:
+        type: "string"
+        description: "The class identifier for this type"
+        default: "com.lge.svl.datamarketplace.contract.Person"
+      id:
+        type: "string"
+        description: "The instance identifier for this type"
+      businessID:
+        type: "string"
+        description: "The identifier of an instance of business"
+      role:
+        $ref: "#/definitions/Role"
+    description: "A participant person"
+    example:
+      role: {}
+      docType: "com.lge.svl.datamarketplace.contract.Person"
+      businessID: "businessID"
+      id: "id"
+  Role:
+    type: "string"
+    description: "Role of a participant"
+    enum:
+    - "CONSORTIUM_ADMIN"
+    - "GROUP_ADMIN"
+    - "DATASET_ADMIN"
+    - "USER"
+
+  GetDataCategoryResponse:
+    type: "object"
+    properties:
+     response:
+       $ref: "#/definitions/DataCategory"
+     error:
+       type: string    
+       
+  GetDataCategoriesResponse:
+    type: "object"
+    properties:
+     response:
+      type: array
+      items:
+       $ref: "#/definitions/DataCategory"
+     responseMetadata:
+      type: array
+      items:
+       $ref: "#/definitions/ResponseMetadata"    
+     error:
+       type: string    
+
+  DataCategory:
+    type: "object"
+    required:
+    - "id"
+    - "name"
+    properties:
+      docType:
+        type: "string"
+        description: "The doctype identifier for this type"
+        default: "com.lge.svl.datamarketplace.contract.DataCategory"
+      id:
+        type: "string"
+        description: "The instance identifier for this type"
+      name:
+        type: "string"
+      definition_format:
+        type: "string"
+      children:
+        type: "array"
+        description: "The identifier of an instance of children"
+        items:
+          $ref: "#/definitions/DataCategory"
+    description: "An asset named DataCategory"
+    example:
+      definition_format: "definition_format"
+      children:
+      - null
+      - null
+      docType: "com.lge.svl.datamarketplace.contract.DataCategory"
+      name: "name"
+      id: "id"
+ 
+  GetDataContractTypeResponse:
+    type: "object"
+    properties:
+     response:
+       $ref: "#/definitions/DataContractType"
+     error:
+       type: string    
+
+  GetDataContractTypesResponse:
+    type: "object"
+    properties:
+     response:
+      type: array
+      items:
+       $ref: "#/definitions/DataContractType"
+     responseMetadata:
+      type: array
+      items:
+       $ref: "#/definitions/ResponseMetadata"  
+     error:
+       type: string   
+ 
+  DataContractType:
+    type: "object"
+    required:
+    - "categoryId"
+    - "dataType"
+    - "description"
+    - "extras"
+    - "id"
+    - "name"
+    - "ownership"
+    - "price"
+    - "provider"
+    properties:
+      docType:
+        type: "string"
+        description: "The doctype identifier for this type"
+        default: "com.lge.svl.datamarketplace.contract.DataContractType"
+      id:
+        type: "string"
+        description: "The instance identifier for this type"
+      thumbnailURL:
+        type: "string"
+        description: "A URL to a thumbnail that represents the dataContractType"
+      name:
+        type: "string"
+      description:
+        type: "string"
+      status:
+        $ref: "#/definitions/DataContractTypeStatus"
+      categoryId:
+        type: "string"
+        description: "The identifier of an instance of categoryId"
+      dataType:
+        $ref: "#/definitions/DataType"
+      price:
+        $ref: "#/definitions/PriceType"
+      ownership:
+        $ref: "#/definitions/Ownership"
+      provider:
+        type: "string"
+        description: "The identifier of an instance of provider"
+      extras:
+        $ref: "#/definitions/ContractTypeExtras"
+      definition_format:
+        type: "string"
+      reviews:
+        type: "array"
+        items:
+          $ref: "#/definitions/Review"
+      score:
+        type: "number"
+        format: "double"
+        default: 3
+      numberOfReviews:
+        type: "number"
+        format: "double"
+        default: 0
+    description: "An asset named DataContractType"
+    example:
+      docType: "com.lge.svl.datamarketplace.contract.DataContractType"
+      numberOfReviews: 5.962133916683182377482808078639209270477294921875
+      dataType: {}
+      description: "description"
+      extras:
+        definition_format: "definition_format"
+        docType: "com.lge.svl.datamarketplace.contract.ContractTypeExtras"
+        streamEndPoint: "streamEndPoint"
+        streamTopic: "streamTopic"
+        id: "id"
+        frequency: 6.02745618307040320615897144307382404804229736328125
+      definition_format: "definition_format"
+      score: 1.46581298050294517310021547018550336360931396484375
+      ownership:
+        ownershipType: "SHARED"
+        revocation:
+          docType: "com.lge.svl.datamarketplace.contract.OwnershipRevocation"
+          revocationTime: "revocationTime"
+          refundPolicy: "refundPolicy"
+          id: "id"
+        docType: "com.lge.svl.datamarketplace.contract.Ownership"
+        id: "id"
+        ownershipVerificationMethod:
+          docType: "com.lge.svl.datamarketplace.contract.OwnershipVerificationMethod"
+          attributeName: "attributeName"
+          id: "id"
+          hash:
+            method: "md5"
+            id: "id"
+            value: "value"
+      reviews:
+      - score: 0.80082819046101150206595775671303272247314453125
+        docType: "com.lge.svl.datamarketplace.contract.Review"
+        id: "id"
+        reviewer: "reviewer"
+        dataContract: "dataContract"
+        reviewText: "reviewText"
+        dataContractType: "dataContractType"
+      - score: 0.80082819046101150206595775671303272247314453125
+        docType: "com.lge.svl.datamarketplace.contract.Review"
+        id: "id"
+        reviewer: "reviewer"
+        dataContract: "dataContract"
+        reviewText: "reviewText"
+        dataContractType: "dataContractType"
+      provider: "provider"
+      price:
+        definition_format: "definition_format"
+        amount: 0.80082819046101150206595775671303272247314453125
+        docType: "com.lge.svl.datamarketplace.contract.PriceType"
+        currency: "USD"
+        id: "id"
+      name: "name"
+      id: "id"
+      categoryId: "categoryId"
+      thumbnailURL: "thumbnailURL"
+      status: {}
+  DataContractTypeStatus:
+    type: "string"
+    description: "Status of dataContractType"
+    enum:
+    - "PROPOSAL"
+    - "DATASHIPPED"
+    - "DATARECEIVED"
+  DataType:
+    type: "string"
+    enum:
+    - "FILE"
+    - "STREAM"
+    - "QUERYABLE"
+  SubmitDataContractProposal:
+    type: "object"
+    required:
+    - "consumer"
+    - "dataContractId"
+    - "dataContractTimestamp"
+    - "dataContractType"
+    - "extras"
+    properties:
+      dataContractId:
+        type: "string"
+      consumer:
+        type: "string"
+        description: "The identifier of an instance of consumer"
+      dataContractType:
+        type: "string"
+        description: "The identifier of an instance of dataContractType"
+      dataContractTimestamp:
+        type: "string"
+        format: "date-time"
+      extras:
+        $ref: "#/definitions/ContractExtras"
+    description: "A transaction named SubmitDataContractProposal"
+    example:
+      dataContractId: "dataContractId"
+      extras:
+        definition_format: "definition_format"
+        fileStatus: "PROPOSAL"
+        docType: "com.lge.svl.datamarketplace.contract.ContractExtras"
+        fileHash:
+          method: "md5"
+          id: "id"
+          value: "value"
+        id: "id"
+        streamEndDateTime: "2000-01-23T04:56:07.000+00:00"
+      consumer: "consumer"
+      dataContractType: "dataContractType"
+      dataContractTimestamp: "2000-01-23T04:56:07.000+00:00"
+  DataInfoSentToConsumer:
+    required:
+    - "dataContract"
+    - "hash"
+    properties:
+      hash:
+        $ref: "#/definitions/Hash"
+      dataContract:
+        type: "string"
+        description: "The identifier of an instance of dataContract"
+    description: "A transaction named DataInfoSentToConsumer"
+  DataReceivedByConsumer:
+    type: "object"
+    required:
+    - "dataContract"
+    properties:
+      dataContract:
+        type: "string"
+        description: "The identifier of an instance of dataContract"
+    description: "A transaction named DataReceivedByConsumer"
+  ContractExtras:
+    type: "object"
+    properties:
+      docType:
+        type: "string"
+        description: "The class identifier for this type"
+        default: "com.lge.svl.datamarketplace.contract.ContractExtras"
+      definition_format:
+        type: "string"
+      fileHash:
+        $ref: "#/definitions/Hash"
+      fileStatus:
+        type: "string"
+        enum:
+        - "PROPOSAL"
+        - "DATASHIPPED"
+        - "DATARECEIVED"
+      streamEndDateTime:
+        type: "string"
+        format: "date-time"
+      id:
+        type: "string"
+    description: "A concept named ContractExtras"
+  Address:
+    type: "object"
+    required:
+    - "country"
+    properties:
+      docType:
+        type: "string"
+        description: "The class identifier for this type"
+        default: "com.lge.svl.datamarketplace.contract.Address"
+      city:
+        type: "string"
+      country:
+        type: "string"
+      street:
+        type: "string"
+      zip:
+        type: "string"
+      id:
+        type: "string"
+    description: "A concept named Address"
+  PriceType:
+    type: "object"
+    required:
+    - "amount"
+    - "currency"
+    properties:
+      docType:
+        type: "string"
+        description: "The class identifier for this type"
+        default: "com.lge.svl.datamarketplace.contract.PriceType"
+      definition_format:
+        type: "string"
+      amount:
+        type: "number"
+        format: "double"
+      currency:
+        type: "string"
+        default: "USD"
+      id:
+        type: "string"
+    description: "A concept named PriceType"
+  Ownership:
+    type: "object"
+    required:
+    - "ownershipType"
+    properties:
+      docType:
+        type: "string"
+        description: "The class identifier for this type"
+        default: "com.lge.svl.datamarketplace.contract.Ownership"
+      ownershipType:
+        type: "string"
+        enum:
+        - "SHARED"
+        - "HOLD_BY_SELLER"
+        - "TRANSFERRED_TO_BUYER"
+      revocation:
+        $ref: "#/definitions/OwnershipRevocation"
+      ownershipVerificationMethod:
+        $ref: "#/definitions/OwnershipVerificationMethod"
+      id:
+        type: "string"
+    description: "A concept named Ownership"
+  ContractTypeExtras:
+    type: "object"
+    properties:
+      docType:
+        type: "string"
+        description: "The class identifier for this type"
+        default: "com.lge.svl.datamarketplace.contract.ContractTypeExtras"
+      definition_format:
+        type: "string"
+      frequency:
+        type: "number"
+        format: "double"
+      streamEndPoint:
+        type: "string"
+      streamTopic:
+        type: "string"
+      id:
+        type: "string"
+      hash:
+        $ref: "#/definitions/Hash"
+    description: "A concept named ContractTypeExtras"
+  Hash:
+    type: "object"
+    required:
+    - "method"
+    - "value"
+    properties:
+      method:
+        type: "string"
+        default: "md5"
+      value:
+        type: "string"
+      id:
+        type: "string"
+    description: "A concept named Hash"
+  OwnershipRevocation:
+    type: "object"
+    required:
+    - "refundPolicy"
+    - "revocationTime"
+    properties:
+      docType:
+        type: "string"
+        description: "The class identifier for this type"
+        default: "com.lge.svl.datamarketplace.contract.OwnershipRevocation"
+      revocationTime:
+        type: "string"
+      refundPolicy:
+        type: "string"
+      id:
+        type: "string"
+    description: "A concept named OwnershipRevocation"
+
+  OwnershipVerificationMethod:
+    type: "object"
+    required:
+    - "attributeName"
+    - "hash"
+    properties:
+      docType:
+        type: "string"
+        description: "The class identifier for this type"
+        default: "com.lge.svl.datamarketplace.contract.OwnershipVerificationMethod"
+      attributeName:
+        type: "string"
+      hash:
+        $ref: "#/definitions/Hash"
+      id:
+        type: "string"
+    description: "A concept named OwnershipVerificationMethod"
+
+  ResponseMetadata:
+   type: "object"
+   properties:
+    recordsCount:
+     type: "string"
+    bookmark:
+     type: string

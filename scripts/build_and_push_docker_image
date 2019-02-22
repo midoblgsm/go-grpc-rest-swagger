@@ -1,0 +1,8 @@
+#!/bin/bash
+set -e
+scripts=$(dirname $0)
+
+echo "building docker image..."
+docker build -t <repo/image> .
+echo "pushing docker image..."
+docker push <repo/image>:latest

@@ -1,0 +1,104 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "api.proto",
+    "version": "version not set"
+  },
+  "schemes": [
+    "http",
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/v1/object": {
+      "post": {
+        "operationId": "CreateObject",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/apiCreateObjectResponse"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/apiCreateObjectRequest"
+            }
+          }
+        ],
+        "tags": [
+          "Object"
+        ]
+      }
+    },
+    "/v1/object/{objectID}": {
+      "delete": {
+        "operationId": "DeleteObject",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/apiDeleteObjectResponse"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "objectID",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "Object"
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "apiCreateObjectRequest": {
+      "type": "object",
+      "properties": {
+        "objectID": {
+          "type": "string"
+        },
+        "objectDescription": {
+          "type": "string"
+        }
+      }
+    },
+    "apiCreateObjectResponse": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "type": "string"
+        },
+        "message": {
+          "type": "string"
+        }
+      }
+    },
+    "apiDeleteObjectResponse": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "type": "string"
+        },
+        "message": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}

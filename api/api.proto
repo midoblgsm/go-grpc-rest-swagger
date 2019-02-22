@@ -1,0 +1,42 @@
+syntax = "proto3";
+package api;
+
+import "google/api/annotations.proto";
+
+
+message CreateObjectRequest {
+  string objectID = 1;
+  string objectDescription = 2;
+  
+}
+
+message CreateObjectResponse {
+    string status =1;
+    string message =2;
+}
+
+message DeleteObjectRequest{
+string objectID = 1;
+}
+
+message DeleteObjectResponse {
+  string status =1;
+  string message =2;
+}
+
+service Object {
+  rpc CreateObject(CreateObjectRequest) returns (CreateObjectResponse) {
+ 
+
+option (google.api.http) = {
+    post: "/v1/object"
+    body: "*"
+};
+  }
+
+   rpc DeleteObject(DeleteObjectRequest) returns (DeleteObjectResponse) {
+option (google.api.http) = {
+    delete: "/v1/object/{objectID}"
+};
+  }
+}

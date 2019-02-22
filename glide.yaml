@@ -1,0 +1,27 @@
+package: github.com/midoblgsm/gogrpcrestswagger-boilerplate
+import:
+- package: github.com/golang/protobuf
+  version: ^1.2.0
+  subpackages:
+  - proto
+- package: github.com/grpc-ecosystem/grpc-gateway
+  version: ^1.7.0
+  subpackages:
+  - runtime
+  - utilities
+- package: github.com/rakyll/statik
+  version: ^0.1.5
+  subpackages:
+  - fs
+- package: golang.org/x/net
+  subpackages:
+  - context
+- package: google.golang.org/genproto
+  subpackages:
+  - googleapis/api/annotations
+- package: google.golang.org/grpc
+  version: ^1.18.0
+  subpackages:
+  - codes
+  - grpclog
+  - status

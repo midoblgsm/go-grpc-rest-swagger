@@ -2,9 +2,9 @@
 TL;DR Bolerplate to get started with protobuf and grpc, bonus: REST gateway, swagger api and docker.
 Clone the repo, build docker image and run:
 ```
-git clone "github.com/midoblgsm/gogrpcrestswagger-boilerplate"
+git clone "github.com/midoblgsm/go-grpc-rest-swagger"
 
-cd gogrpcrestswagger-boilerplate
+cd go-grpc-rest-swagger
 
 docker build -t myniceboilerplate .
 docker run -p 7788:7788 -p 7789:7789 myniceboilerplate
